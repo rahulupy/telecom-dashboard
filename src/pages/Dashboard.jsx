@@ -1,6 +1,6 @@
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardGrid from "../components/dashboard/DashboardGrid";
-import MapPlaceholder from "../components/map/MapPlaceholder";
+import LiveMap from "../components/map/LiveMap";
 
 export default function Dashboard() {
   return (
@@ -12,7 +12,7 @@ export default function Dashboard() {
       <DashboardGrid />
 
       <div className="mt-6">
-        <MapPlaceholder />
+        <LiveMap />
       </div>
     </DashboardLayout>
   );
