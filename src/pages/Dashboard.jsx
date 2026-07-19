@@ -3,12 +3,12 @@ import DashboardLayout from "../layouts/DashboardLayout";
 export default function Dashboard() {
   return (
     <DashboardLayout>
-      <h2 className="text-2xl font-bold">
+      <h1 className="text-3xl font-bold">
         Welcome Officer
-      </h2>
+      </h1>
 
-      <p className="mt-2 text-gray-600">
-        Live telecom tracking dashboard.
+      <p className="text-gray-500 mt-2">
+        Telecom Tower Multi-Lateration Dashboard
       </p>
     </DashboardLayout>
   );
