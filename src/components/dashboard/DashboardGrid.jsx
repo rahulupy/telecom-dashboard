@@ -7,6 +7,7 @@ import AlertsPanel from "./AlertsPanel";
 import TowerStatusPanel from "./TowerStatusPanel";
 import ConfidenceChart from "../charts/ConfidenceChart";
 import TowerSignalChart from "../charts/TowerSignalChart";
+import RadiusTrendChart from "../charts/RadiusTrendChart";
 
 export default function DashboardGrid() {
   return (
@@ -38,6 +39,10 @@ export default function DashboardGrid() {
 
 <div className="col-span-12">
     <TowerSignalChart />
+</div>
+
+<div className="col-span-12">
+    <RadiusTrendChart />
 </div>
 
 {/* Bottom Right */}
