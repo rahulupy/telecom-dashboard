@@ -5,10 +5,24 @@ import {
   WifiLow,
   WifiOff,
 } from "lucide-react";
-import { getTowers } from "../../services/towerService";
+
+import useTowers from "../../hooks/useTowers";
+import LoadingCard from "../common/LoadingCard";
+import ErrorCard from "../common/ErrorCard";
 
 export default function TowerStatusPanel() {
-  const towers = getTowers();
+  const { data: towers, loading, error } = useTowers();
+
+  if (loading) {
+    return <LoadingCard title="📡 Tower Status"/>
+  }
+
+  if (error) {
+    return (
+      <ErrorCard title="📡 Tower Status"
+      message="Unable to load tower data."/>
+    );
+  }
 
   return (
     <Card title="📡 Tower Status">
@@ -50,9 +64,7 @@ export default function TowerStatusPanel() {
                 <Icon className={color} size={18} />
 
                 <span className="text-slate-300 text-sm">
-                  {tower.signal !== null
-                    ? `${tower.signal} dBm`
-                    : "--"}
+                  {tower.signal ?? "--"} dBm
                 </span>
               </div>
             </div>

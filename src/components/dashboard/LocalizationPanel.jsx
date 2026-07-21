@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Card from "../ui/Card";
 import Badge from "../ui/Badge";
 import {
@@ -7,18 +6,26 @@ import {
   Compass,
   Clock3,
 } from "lucide-react";
-import { getLocalization } from "../../services/localizationService";
+import useLocalization from "../../hooks/useLocalization";
+import LoadingCard from "../common/LoadingCard";
+import ErrorCard from "../common/ErrorCard";
 
 export default function LocalizationPanel() {
-  const [data, setData] = useState(getLocalization());
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setData(getLocalization());
-    }, 3000);
+  const { data, loading, error } = useLocalization();
 
-    return () => clearInterval(interval);
-  }, []);
+  if (loading) {
+  return <LoadingCard title="📡 Localization Status" />;
+}
+
+if (error) {
+  return (
+    <ErrorCard
+      title="📡 Localization Status"
+      message="Unable to load localization data."
+    />
+  );
+}
 
   return (
     <Card title="📡 Localization Status">
