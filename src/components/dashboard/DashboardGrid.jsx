@@ -6,6 +6,7 @@ import TimelinePanel from "./TimelinePanel";
 import AlertsPanel from "./AlertsPanel";
 import TowerStatusPanel from "./TowerStatusPanel";
 import ConfidenceChart from "../charts/ConfidenceChart";
+import TowerSignalChart from "../charts/TowerSignalChart";
 
 export default function DashboardGrid() {
   return (
@@ -33,6 +34,10 @@ export default function DashboardGrid() {
 
 <div className="col-span-12">
   <ConfidenceChart />
+</div>
+
+<div className="col-span-12">
+    <TowerSignalChart />
 </div>
 
 {/* Bottom Right */}
