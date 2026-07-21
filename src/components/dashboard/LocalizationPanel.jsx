@@ -1,0 +1,89 @@
+import { useEffect, useState } from "react";
+import Card from "../ui/Card";
+import Badge from "../ui/Badge";
+import {
+  RadioTower,
+  LocateFixed,
+  Compass,
+  Clock3,
+} from "lucide-react";
+import { getLocalization } from "../../services/localizationService";
+
+export default function LocalizationPanel() {
+  const [data, setData] = useState(getLocalization());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setData(getLocalization());
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Card title="📡 Localization Status">
+      <div className="space-y-6">
+
+        <div className="flex items-center justify-between">
+          <span className="text-slate-400">Engine</span>
+          <Badge color="green">{data.engineStatus}</Badge>
+        </div>
+
+        <div>
+          <div className="flex justify-between mb-2">
+            <span className="text-slate-400">Confidence</span>
+            <span className="text-blue-400 font-semibold">
+              {data.confidence}%
+            </span>
+          </div>
+
+          <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-blue-500 rounded-full transition-all duration-500"
+              style={{ width: `${data.confidence}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <LocateFixed className="text-blue-400" size={20} />
+          <div>
+            <p className="text-slate-400 text-sm">Search Radius</p>
+            <h3 className="text-white text-xl font-semibold">
+              {data.radius} m
+            </h3>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <RadioTower className="text-green-400" size={20} />
+          <div>
+            <p className="text-slate-400 text-sm">Nearby Towers</p>
+            <h3 className="text-white text-xl font-semibold">
+              {data.nearbyTowers}
+            </h3>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Compass className="text-yellow-400" size={20} />
+          <div>
+            <p className="text-slate-400 text-sm">Estimated Direction</p>
+            <h3 className="text-white text-xl font-semibold">
+              {data.direction}
+            </h3>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Clock3 className="text-slate-400" size={20} />
+          <div>
+            <p className="text-slate-400 text-sm">Last Update</p>
+            <h3 className="text-white">{data.lastUpdate}</h3>
+          </div>
+        </div>
+
+      </div>
+    </Card>
+  );
+}

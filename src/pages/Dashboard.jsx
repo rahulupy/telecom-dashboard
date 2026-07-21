@@ -1,19 +1,12 @@
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardGrid from "../components/dashboard/DashboardGrid";
-import LiveMap from "../components/map/LiveMap";
+import StatusCards from "../components/dashboard/StatusCards";
 
 export default function Dashboard() {
   return (
     <DashboardLayout>
-      <h1 className="text-3xl font-bold mb-6">
-        Ground Officer Dashboard
-      </h1>
-
+      <StatusCards />
       <DashboardGrid />
-
-      <div className="mt-6">
-        <LiveMap />
-      </div>
     </DashboardLayout>
   );
 }
