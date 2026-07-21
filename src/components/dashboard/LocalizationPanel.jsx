@@ -9,8 +9,11 @@ import {
 import useLocalization from "../../hooks/useLocalization";
 import LoadingCard from "../common/LoadingCard";
 import ErrorCard from "../common/ErrorCard";
+import useDemo from "../../hooks/useDemo";
 
 export default function LocalizationPanel() {
+
+  const demo = useDemo();
 
   const { data, loading, error } = useLocalization();
 
@@ -29,7 +32,7 @@ if (error) {
 
   return (
     <Card title="📡 Localization Status">
-      <div className="space-y-6">
+      <div className="space-y-4">
 
         <div className="flex items-center justify-between">
           <span className="text-slate-400">Engine</span>
@@ -40,14 +43,14 @@ if (error) {
           <div className="flex justify-between mb-2">
             <span className="text-slate-400">Confidence</span>
             <span className="text-blue-400 font-semibold">
-              {data.confidence}%
+              {demo.confidence}%
             </span>
           </div>
 
           <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
             <div
               className="h-full bg-blue-500 rounded-full transition-all duration-500"
-              style={{ width: `${data.confidence}%` }}
+              style={{ width: `${demo.confidence}%` }}
             />
           </div>
         </div>
@@ -57,7 +60,7 @@ if (error) {
           <div>
             <p className="text-slate-400 text-sm">Search Radius</p>
             <h3 className="text-white text-xl font-semibold">
-              {data.radius} m
+              {demo.radius} m
             </h3>
           </div>
         </div>
@@ -77,7 +80,7 @@ if (error) {
           <div>
             <p className="text-slate-400 text-sm">Estimated Direction</p>
             <h3 className="text-white text-xl font-semibold">
-              {data.direction}
+              {demo.direction}
             </h3>
           </div>
         </div>
@@ -92,5 +95,6 @@ if (error) {
 
       </div>
     </Card>
+    
   );
 }

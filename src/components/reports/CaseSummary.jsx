@@ -8,17 +8,17 @@ export default function CaseSummary() {
   const { data, loading, error } = useCaseSummary();
 
   if (loading) {
-    return
-      <LoadingCard title="📄 Case Summary"/>
-  }
+  return <LoadingCard title="📄 Case Summary" />;
+}
 
-  if (error) {
-    return (
-      <Card title="📄 Case Summary"
-          message="Failed to load case summary."
-          />
-    );
-  }
+if (error) {
+  return (
+    <ErrorCard
+      title="📄 Case Summary"
+      message="Failed to load case summary."
+    />
+  );
+}
 
   return (
     <Card title="📄 Case Summary">

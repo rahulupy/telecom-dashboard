@@ -1,107 +1,76 @@
-import Card from "../common/Card";
+import Card from "../ui/Card";
 import LoadingCard from "../common/LoadingCard";
 import ErrorCard from "../common/ErrorCard";
-
 import useTimeline from "../../hooks/useTimeline";
-
-import {
-  RadioTower,
-  MapPinned,
-  CheckCircle2,
-  AlertTriangle,
-} from "lucide-react";
 
 export default function TimelinePanel() {
   const { data: timeline, loading, error } = useTimeline();
 
   if (loading) {
-    return <LoadingCard title="📜 Activity Timeline" />;
+    return <LoadingCard title="🕒 Movement Timeline" />;
   }
 
   if (error) {
     return (
       <ErrorCard
-        title="📜 Activity Timeline"
-        message="Unable to load timeline."
+        title="🕒 Movement Timeline"
+        message="Unable to load movement timeline."
       />
     );
   }
 
   return (
-    <Card title="📜 Activity Timeline">
-      <div className="space-y-4">
+    <Card title="🕒 Movement Timeline">
+      <div className="max-h-64 overflow-y-auto pr-2">
 
-        {timeline.map((item) => {
+        {timeline.map((item, index) => {
 
-          let Icon = CheckCircle2;
-          let color = "text-green-400";
-          let border = "border-green-500";
-
-          switch (item.type) {
-            case "tower":
-              Icon = RadioTower;
-              color = "text-blue-400";
-              border = "border-blue-500";
-              break;
-
-            case "location":
-              Icon = MapPinned;
-              color = "text-purple-400";
-              border = "border-purple-500";
-              break;
-
-            case "warning":
-              Icon = AlertTriangle;
-              color = "text-yellow-400";
-              border = "border-yellow-500";
-              break;
-
-            case "success":
-              Icon = CheckCircle2;
-              color = "text-green-400";
-              border = "border-green-500";
-              break;
-
-            default:
-              break;
-          }
+          const dotColor =
+            item.type === "warning"
+              ? "bg-yellow-500"
+              : item.type === "error"
+              ? "bg-red-500"
+              : item.type === "success"
+              ? "bg-green-500"
+              : "bg-blue-600";
 
           return (
             <div
               key={item.id}
-              className={`rounded-xl border-l-4 ${border} bg-slate-800/50 p-4 hover:bg-slate-800 transition`}
+              className="relative pl-8 pb-6"
             >
-              <div className="flex justify-between">
 
-                <div className="flex gap-3">
+              {/* Vertical Line */}
+              {index !== timeline.length - 1 && (
+                <div className="absolute left-3 top-6 h-full w-0.5 bg-slate-700" />
+              )}
 
-                  <Icon
-                    className={color}
-                    size={22}
-                  />
-
-                  <div>
-
-                    <h4 className="text-white font-semibold">
-                      {item.title}
-                    </h4>
-
-                    <p className="text-slate-400 text-sm mt-1">
-                      {item.description}
-                    </p>
-
-                  </div>
-
-                </div>
-
-                <span className="text-xs text-slate-500">
-                  {item.time}
-                </span>
-
+              {/* Timeline Dot */}
+              <div
+                className={`absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full ${dotColor} ring-4 ring-slate-900`}
+              >
+                <div className="h-2 w-2 rounded-full bg-white" />
               </div>
+
+              {/* Time */}
+              <p className="text-xs uppercase tracking-wide text-slate-500">
+                {item.time}
+              </p>
+
+              {/* Event */}
+              <h4 className="mt-1 text-sm font-semibold text-white">
+                {item.event}
+              </h4>
+
+              {/* Optional description */}
+              {item.description && (
+                <p className="mt-1 text-xs text-slate-400">
+                  {item.description}
+                </p>
+              )}
+
             </div>
           );
-
         })}
 
       </div>

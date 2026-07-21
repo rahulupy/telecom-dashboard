@@ -2,22 +2,20 @@ import Card from "../ui/Card";
 import LoadingCard from "../common/LoadingCard";
 import ErrorCard from "../common/ErrorCard";
 
-import useAlerts from "../../hooks/useAlerts";
-
 import {
-  Info,
+  CheckCircle2,
   AlertTriangle,
-  ShieldAlert,
+  RadioTower,
+  ArrowRightCircle,
 } from "lucide-react";
 
-export default function AlertsPanel() {
+import useAlerts from "../../hooks/useAlerts";
 
+export default function AlertsPanel() {
   const { data: alerts, loading, error } = useAlerts();
 
   if (loading) {
-    return (
-      <LoadingCard title="🚨 Localization Alerts" />
-    );
+    return <LoadingCard title="🚨 Localization Alerts" />;
   }
 
   if (error) {
@@ -32,71 +30,50 @@ export default function AlertsPanel() {
   return (
     <Card title="🚨 Localization Alerts">
 
-      <div className="space-y-4">
+      <div className="max-h-64 space-y-3 overflow-y-auto pr-2">
 
         {alerts.map((alert) => {
 
-          let Icon = Info;
-          let border = "border-blue-500";
-          let badge = "bg-blue-500/20 text-blue-400";
+          let Icon = RadioTower;
+          let iconColor = "text-blue-400";
+          let badge = "INFO";
+          let badgeColor = "bg-blue-500";
 
-          switch (alert.severity) {
+          switch (alert.type) {
+            case "success":
+              Icon = CheckCircle2;
+              iconColor = "text-green-400";
+              badge = "SUCCESS";
+              badgeColor = "bg-green-500";
+              break;
 
             case "warning":
+              Icon = ArrowRightCircle;
+              iconColor = "text-yellow-400";
+              badge = "WARNING";
+              badgeColor = "bg-yellow-500";
+              break;
+
+            case "error":
               Icon = AlertTriangle;
-              border = "border-yellow-500";
-              badge = "bg-yellow-500/20 text-yellow-400";
-              break;
-
-            case "critical":
-              Icon = ShieldAlert;
-              border = "border-red-500";
-              badge = "bg-red-500/20 text-red-400";
-              break;
-
-            default:
+              iconColor = "text-red-400";
+              badge = "CRITICAL";
+              badgeColor = "bg-red-500";
               break;
           }
 
           return (
-
             <div
               key={alert.id}
-              className={`border-l-4 ${border} rounded-xl bg-slate-800/60 p-4 hover:bg-slate-800 transition-all`}
+              className="rounded-xl border border-slate-700 bg-slate-800/60 p-4 transition hover:bg-slate-800"
             >
+              <div className="mb-2 flex items-center justify-between">
 
-              <div className="flex justify-between">
-
-                <div className="flex gap-3">
-
-                  <Icon
-                    className={badge.split(" ")[1]}
-                    size={22}
-                  />
-
-                  <div>
-
-                    <div className="flex items-center gap-2">
-
-                      <h4 className="font-semibold text-white">
-                        {alert.title}
-                      </h4>
-
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-xs ${badge}`}
-                      >
-                        {alert.severity.toUpperCase()}
-                      </span>
-
-                    </div>
-
-                    <p className="text-slate-400 text-sm mt-1">
-                      {alert.message}
-                    </p>
-
-                  </div>
-
-                </div>
+                <span
+                  className={`rounded-full px-2 py-1 text-xs font-semibold text-white ${badgeColor}`}
+                >
+                  {badge}
+                </span>
 
                 <span className="text-xs text-slate-500">
                   {alert.time}
@@ -104,10 +81,29 @@ export default function AlertsPanel() {
 
               </div>
 
+              <div className="flex gap-3">
+
+                <Icon
+                  className={iconColor}
+                  size={20}
+                />
+
+                <div>
+
+                  <h4 className="font-semibold text-white">
+                    {alert.title}
+                  </h4>
+
+                  <p className="mt-1 text-sm text-slate-400">
+                    {alert.message}
+                  </p>
+
+                </div>
+
+              </div>
+
             </div>
-
           );
-
         })}
 
       </div>

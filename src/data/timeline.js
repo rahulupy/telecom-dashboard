@@ -1,31 +1,31 @@
 const timeline = [
   {
     id: 1,
-    type: "tower",
-    title: "Tower Connected",
-    description: "Tower T001 connected successfully",
     time: "10:20",
+    event: "Tower Connected",
+    description: "Tower T001 established connection.",
+    type: "success",
   },
   {
     id: 2,
-    type: "location",
-    title: "Localization Updated",
-    description: "Confidence increased to 82%",
     time: "10:24",
+    event: "Localization Updated",
+    description: "Confidence increased to 82%.",
+    type: "info",
   },
   {
     id: 3,
-    type: "success",
-    title: "Search Radius Reduced",
-    description: "Radius reduced to 100 m",
     time: "10:30",
+    event: "Search Radius Reduced",
+    description: "Estimated search area reduced to 120 m.",
+    type: "warning",
   },
   {
     id: 4,
-    type: "warning",
-    title: "Weak Signal",
-    description: "Tower T003 signal strength dropped",
     time: "10:35",
+    event: "Signal Lost",
+    description: "Temporary loss from Tower T003.",
+    type: "error",
   },
 ];
 

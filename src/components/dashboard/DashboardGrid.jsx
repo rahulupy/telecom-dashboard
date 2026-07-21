@@ -1,60 +1,65 @@
 import LiveMap from "../map/LiveMap";
-import Card from "../ui/Card";
 
 import LocalizationPanel from "./LocalizationPanel";
 import TimelinePanel from "./TimelinePanel";
 import AlertsPanel from "./AlertsPanel";
 import TowerStatusPanel from "./TowerStatusPanel";
+
 import ConfidenceChart from "../charts/ConfidenceChart";
 import TowerSignalChart from "../charts/TowerSignalChart";
 import RadiusTrendChart from "../charts/RadiusTrendChart";
+
 import CaseSummary from "../reports/CaseSummary";
 
 export default function DashboardGrid() {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 mt-6">
+    <div className="grid grid-cols-12 gap-6 mt-6">
 
       {/* Map */}
-      <div className="xl:col-span-8">
+      <div className="col-span-12 xl:col-span-8">
         <LiveMap />
       </div>
 
-      {/* Right Panel */}
-      <div className="xl:col-span-4">
+      {/* Localization */}
+      <div className="col-span-12 xl:col-span-4">
         <LocalizationPanel />
       </div>
 
-      {/* Bottom Left */}
-<div className="xl:col-span-4">
-    <TimelinePanel />
-</div>
+      {/* Timeline */}
+      <div className="col-span-12 md:col-span-6 xl:col-span-4">
+        <TimelinePanel />
+      </div>
 
-{/* Bottom Center */}
-<div className="xl:col-span-4">
-    <AlertsPanel />
-</div>
+      {/* Alerts */}
+      <div className="col-span-12 md:col-span-6 xl:col-span-4">
+        <AlertsPanel />
+      </div>
 
-<div className="col-span-12">
-  <ConfidenceChart />
-</div>
+      {/* Confidence */}
+      <div className="col-span-12 md:col-span-6">
+        <ConfidenceChart />
+      </div>
 
-<div className="col-span-12">
-    <TowerSignalChart />
-</div>
+      {/* Signal */}
+      <div className="col-span-12 md:col-span-6">
+        <TowerSignalChart />
+      </div>
 
-<div className="col-span-12">
-    <RadiusTrendChart />
-</div>
+      {/* Radius */}
+      <div className="col-span-12 md:col-span-6">
+        <RadiusTrendChart />
+      </div>
 
-{/* Bottom Right */}
-<div className="xl:col-span-4">
-    <TowerStatusPanel />
-</div>
+      {/* Tower Status */}
+      <div className="col-span-12 md:col-span-6">
+        <TowerStatusPanel />
+      </div>
+
+      {/* Case Summary */}
+      <div className="col-span-12">
+        <CaseSummary />
+      </div>
 
     </div>
   );
-
-  <div className="col-span-12">
-    <CaseSummary />
-</div>
 }

@@ -17,3 +17,77 @@ body {
   font-family: Inter, sans-serif;
   background: #f1f5f9;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn .5s ease;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+.officer-marker {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.officer-marker .dot {
+  width: 16px;
+  height: 16px;
+  background: #3b82f6;
+  border: 3px solid white;
+  border-radius: 9999px;
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  z-index: 2;
+}
+
+.officer-marker .pulse {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(59,130,246,.35);
+  border-radius: 9999px;
+  animation: officerPulse 2s infinite;
+}
+
+@keyframes officerPulse {
+
+  0% {
+    transform: scale(.5);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+}
