@@ -8,6 +8,7 @@ import TowerStatusPanel from "./TowerStatusPanel";
 import ConfidenceChart from "../charts/ConfidenceChart";
 import TowerSignalChart from "../charts/TowerSignalChart";
 import RadiusTrendChart from "../charts/RadiusTrendChart";
+import CaseSummary from "../reports/CaseSummary";
 
 export default function DashboardGrid() {
   return (
@@ -52,4 +53,8 @@ export default function DashboardGrid() {
 
     </div>
   );
+
+  <div className="col-span-12">
+    <CaseSummary />
+</div>
 }
