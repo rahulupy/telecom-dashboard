@@ -5,6 +5,7 @@ import LocalizationPanel from "./LocalizationPanel";
 import TimelinePanel from "./TimelinePanel";
 import AlertsPanel from "./AlertsPanel";
 import TowerStatusPanel from "./TowerStatusPanel";
+import ConfidenceChart from "../charts/ConfidenceChart";
 
 export default function DashboardGrid() {
   return (
@@ -28,6 +29,10 @@ export default function DashboardGrid() {
 {/* Bottom Center */}
 <div className="xl:col-span-4">
     <AlertsPanel />
+</div>
+
+<div className="col-span-12">
+  <ConfidenceChart />
 </div>
 
 {/* Bottom Right */}
