@@ -1,59 +1,84 @@
-import { Circle } from "react-leaflet";
-import { getLocalization } from "../../services/localizationService";
+import { useEffect, useRef } from "react";
+import { useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet.heat";
 
-export default function HeatmapLayer() {
-  const data = getLocalization();
+import { usePlayback } from "../../context/PlaybackContext";
+import { useMapLayers } from "../../context/MapLayerContext";
 
-  const center = [
-    data.heatmap[0].lat,
-    data.heatmap[0].lng,
-  ];
+export default function HeatMapLayer() {
+  const map = useMap();
 
-  return (
-    <>
-      <Circle
-        center={center}
-        radius={40}
-        pathOptions={{
-          color: "#ef4444",
-          fillColor: "#ef4444",
-          fillOpacity: 0.35,
-          weight: 1,
-        }}
-      />
+  const { history } = usePlayback();
+  const { layers } = useMapLayers();
 
-      <Circle
-        center={center}
-        radius={80}
-        pathOptions={{
-          color: "#f97316",
-          fillColor: "#f97316",
-          fillOpacity: 0.25,
-          weight: 1,
-        }}
-      />
+  const heatLayerRef = useRef(null);
 
-      <Circle
-        center={center}
-        radius={130}
-        pathOptions={{
-          color: "#eab308",
-          fillColor: "#eab308",
-          fillOpacity: 0.15,
-          weight: 1,
-        }}
-      />
+  useEffect(() => {
+    // Remove previous heat layer
+    if (heatLayerRef.current) {
+      map.removeLayer(heatLayerRef.current);
+      heatLayerRef.current = null;
+    }
 
-      <Circle
-        center={center}
-        radius={180}
-        pathOptions={{
-          color: "#22c55e",
-          fillColor: "#22c55e",
-          fillOpacity: 0.08,
-          weight: 1,
-        }}
-      />
-    </>
-  );
+    // Layer disabled
+    if (!layers.heatmap) return;
+
+    // No data
+    if (!history.length) return;
+
+    // Only use recent movement points
+    const recentHistory = history.slice(-30);
+
+    const points = recentHistory.map((point) => {
+      const radius = Number(point.confidence_radius_m);
+
+      let weight = 0.4;
+
+      if (radius <= 50) {
+        weight = 1.0;
+      } else if (radius <= 100) {
+        weight = 0.9;
+      } else if (radius <= 200) {
+        weight = 0.75;
+      } else if (radius <= 300) {
+        weight = 0.6;
+      }
+      else {
+        weight = 0.45;
+      }
+
+      return [
+        Number(point.latitude),
+        Number(point.longitude),
+        weight,
+      ];
+    });
+
+    heatLayerRef.current = L.heatLayer(points, {
+      radius: 28,
+      blur: 22,
+      maxZoom: 18,
+      minOpacity: 0.35,
+
+      gradient: {
+        0.2: "#2563eb", // Blue
+        0.4: "#22c55e", // Green
+        0.6: "#facc15", // Yellow
+        0.8: "#f97316", // Orange
+        1.0: "#ef4444", // Red
+      },
+    });
+
+    heatLayerRef.current.addTo(map);
+
+    return () => {
+      if (heatLayerRef.current) {
+        map.removeLayer(heatLayerRef.current);
+        heatLayerRef.current = null;
+      }
+    };
+  }, [history, layers.heatmap, map]);
+
+  return null;
 }

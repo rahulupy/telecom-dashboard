@@ -7,8 +7,7 @@ export default function MapInfoPanel() {
   if (loading || error || !data) return null;
 
   return (
-    <div className="absolute top-4 left-4 z-[1000] w-72 rounded-2xl border border-slate-700 bg-slate-900/90 backdrop-blur-md shadow-2xl p-5">
-
+    <div className="absolute top-4 right-4 z-[1000] w-64 rounded-xl border border-slate-700 bg-slate-900/95 p-4 shadow-xl">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-white font-semibold tracking-wide">
           📄 {data.caseId}

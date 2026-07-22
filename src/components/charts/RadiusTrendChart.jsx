@@ -14,26 +14,21 @@ import ErrorCard from "../common/ErrorCard";
 import useCharts from "../../hooks/useCharts";
 
 export default function RadiusTrendChart() {
-  const { radius, loading, error } = useCharts();
+  const { data, loading, error } = useCharts();
 
   if (loading) {
-    return <LoadingCard title="📍 Search Radius Trend" />;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return (
-      <ErrorCard
-        title="📍 Search Radius Trend"
-        message="Unable to load radius data."
-      />
-    );
+    return <div>Failed to load chart.</div>;
   }
 
   return (
     <Card title="📍 Search Radius Trend">
       <div className="h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={radius}>
+          <AreaChart data={data}>
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="#334155"
@@ -44,7 +39,10 @@ export default function RadiusTrendChart() {
               stroke="#94A3B8"
             />
 
-            <YAxis stroke="#94A3B8" />
+            <YAxis
+              stroke="#94A3B8"
+              domain={["auto", "auto"]}
+            />
 
             <Tooltip />
 

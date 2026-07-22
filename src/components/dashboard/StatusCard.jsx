@@ -10,40 +10,78 @@ export default function StatusCard({
 
   return (
     <div
-      className={`group rounded-2xl border border-slate-700 bg-slate-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-blue-500/20 overflow-hidden`}
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-2xl
+        border
+        border-slate-700
+        bg-slate-900
+        p-5
+        shadow-lg
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:border-blue-500
+        hover:shadow-2xl
+        hover:shadow-blue-500/20
+      "
     >
       {/* Accent Line */}
       <div className={`h-1 ${color}`} />
 
       <div className="p-5">
 
+        <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500" />
+
         {/* Header */}
         <div className="flex items-center justify-between">
 
-          <div>
-            <p className="text-xs uppercase tracking-wider text-slate-500">
-              {title}
-            </p>
+        <div className="mt-5">
 
-            <h2 className="mt-3 text-4xl font-bold text-white">
-              {value}
+  <h2 className="text-4xl font-extrabold tracking-tight text-white">
 
-              {unit && (
-                <span className="ml-1 text-xl font-normal text-slate-400">
-                  {unit}
-                </span>
-              )}
-            </h2>
-          </div>
+    {value}
+
+    {unit && (
+      <span className="ml-2 text-lg font-medium text-slate-400">
+        {unit}
+      </span>
+    )}
+
+  </h2>
+
+  <p className="mt-2 text-sm text-slate-400">
+  {subtitle}
+</p>
+
+</div> 
 
           {Icon && (
-            <div className="rounded-xl bg-slate-800 p-3 transition group-hover:bg-slate-700">
-              <Icon
-                size={24}
-                className="text-blue-400"
-              />
-            </div>
-          )}
+  <div
+    className="
+      flex
+      h-14
+      w-14
+      items-center
+      justify-center
+      rounded-2xl
+      bg-gradient-to-br
+      from-blue-600
+      to-cyan-500
+      shadow-lg
+      transition-transform
+      duration-300
+      group-hover:scale-110
+    "
+  >
+    <Icon
+      size={28}
+      className="text-white"
+    />
+  </div>
+)}
 
         </div>
 

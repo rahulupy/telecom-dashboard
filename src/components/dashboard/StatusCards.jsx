@@ -27,37 +27,33 @@ export default function StatusCards() {
   }
 
   const cards = [
-    {
-      title: "Case ID",
-      value: data.caseId,
-      subtitle: "Live Investigation",
-      color: "border-blue-500",
-      icon: FileText,
-    },
-    {
-      title: "Status",
-      value: data.engineStatus,
-      subtitle: "Localization Running",
-      color: "border-green-500",
-      icon: Activity,
-    },
-    {
-      title: "Confidence",
-      value: data.confidence,
-      unit: "%",
-      subtitle: "Localization Accuracy",
-      color: "border-cyan-500",
-      icon: Target,
-    },
-    {
-      title: "Radius",
-      value: data.radius,
-      unit: "m",
-      subtitle: data.direction,
-      color: "border-orange-500",
-      icon: Gauge,
-    },
-  ];
+  {
+    title: "Case ID",
+    value: data.caseId,
+    subtitle: "Investigation Active",
+    icon: FileText,
+  },
+  {
+    title: "Status",
+    value: data.engineStatus,
+    subtitle: "Localization Running",
+    icon: Activity,
+  },
+  {
+    title: "Confidence",
+    value: data.confidence,
+    unit: "%",
+    subtitle: "High Localization Accuracy",
+    icon: Target,
+  },
+  {
+    title: "Radius",
+    value: data.radius,
+    unit: "m",
+    subtitle: data.direction,
+    icon: Gauge,
+  },
+];
 
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">

@@ -1,24 +1,21 @@
-import { useState, useEffect } from "react";
-import {
-  getConfidenceData,
-  getSignalData,
-  getRadiusData,
-} from "../services/chartService";
+import { useMemo } from "react";
+import { usePlayback } from "../context/PlaybackContext";
+import { buildChartData } from "../services/movementService";
 
 export default function useCharts() {
-  const [confidence, setConfidence] = useState([]);
-  const [signal, setSignal] = useState([]);
-  const [radius, setRadius] = useState([]);
+  const { history, currentIndex } = usePlayback();
 
-  useEffect(() => {
-    setConfidence(getConfidenceData());
-    setSignal(getSignalData());
-    setRadius(getRadiusData());
-  }, []);
+  const data = useMemo(() => {
+    if (history.length === 0) return [];
+
+    return buildChartData(
+      history.slice(0, currentIndex + 1)
+    );
+  }, [history, currentIndex]);
 
   return {
-    confidence,
-    signal,
-    radius,
+    data,
+    loading: history.length === 0,
+    error: false,
   };
 }

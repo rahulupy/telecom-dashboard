@@ -22,51 +22,55 @@ if (error) {
 
   return (
     <Card title="📄 Case Summary">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
 
-      <div className="grid grid-cols-2 gap-6">
+        <Info label="Case ID" value={data.caseId} />
 
-        <div>
-          <p className="text-slate-400 text-sm">Case ID</p>
-          <h3 className="text-white">{data.caseId}</h3>
-        </div>
+        <Info label="Subscriber" value={data.subscriber} />
 
-        <div>
-          <p className="text-slate-400 text-sm">Status</p>
-          <h3 className="text-green-400">
-            {data.engineStatus}
-          </h3>
-        </div>
+        <Info label="Status" value={data.status} />
 
-        <div>
-          <p className="text-slate-400 text-sm">Confidence</p>
-          <h3 className="text-blue-400">
-            {data.confidence}%
-          </h3>
-        </div>
+        <Info label="Method" value={data.method} />
 
-        <div>
-          <p className="text-slate-400 text-sm">Search Radius</p>
-          <h3 className="text-white">
-            {data.radius} m
-          </h3>
-        </div>
+        <Info
+          label="Confidence"
+          value={`${data.confidence}%`}
+        />
 
-        <div>
-          <p className="text-slate-400 text-sm">Direction</p>
-          <h3 className="text-white">
-            {data.direction}
-          </h3>
-        </div>
+        <Info
+          label="Radius"
+          value={`${data.radius} m`}
+        />
 
-        <div>
-          <p className="text-slate-400 text-sm">Updated</p>
-          <h3 className="text-white">
-            {data.lastUpdate}
-          </h3>
-        </div>
+        <Info
+          label="Towers Used"
+          value={data.towers}
+        />
+
+        <Info
+          label="Direction"
+          value={data.direction}
+        />
 
       </div>
 
+      <div className="mt-6 border-t border-slate-700 pt-4 text-right text-xs text-slate-500">
+        Last Updated: {data.updated}
+      </div>
     </Card>
+  );
+}
+
+function Info({ label, value }) {
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-4 transition hover:border-blue-500">
+      <p className="text-xs uppercase tracking-wide text-slate-400">
+        {label}
+      </p>
+
+      <p className="mt-2 text-lg font-semibold text-white">
+        {value}
+      </p>
+    </div>
   );
 }

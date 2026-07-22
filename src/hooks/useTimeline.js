@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
-import { getTimeline } from "../services/timelineService";
+import { useMemo } from "react";
+import { usePlayback } from "../context/PlaybackContext";
+import { buildTimeline } from "../services/timelineService";
 
 export default function useTimeline() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { history, currentIndex } = usePlayback();
 
-  useEffect(() => {
-    try {
-      setData(getTimeline());
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    }
-  }, []);
+  const data = useMemo(() => {
+    if (history.length === 0) return [];
+
+    return buildTimeline(
+      history.slice(0, currentIndex + 1)
+    );
+  }, [history, currentIndex]);
 
   return {
     data,
-    loading,
-    error,
+    loading: history.length === 0,
+    error: false,
   };
 }

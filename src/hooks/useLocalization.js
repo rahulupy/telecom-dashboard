@@ -1,40 +1,38 @@
 import { useEffect, useState } from "react";
-import { getLocalization } from "../services/localizationService";
+import { usePlayback } from "../context/PlaybackContext";
+import { buildLocalization } from "../services/localizationService";
 
 export default function useLocalization() {
+  const { history, current } = usePlayback();
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!current || history.length === 0) {
+      return;
+    }
+
     try {
-      setData(getLocalization());
+      const localization = buildLocalization(
+        current,
+        history
+      );
+
+      setData(localization);
       setLoading(false);
+      setError(null);
     } catch (err) {
+      console.error(err);
       setError(err);
       setLoading(false);
     }
+  }, [current, history]);
 
-    const interval = setInterval(() => {
-      setData((prev) => {
-        if (!prev) return prev;
-
-        return {
-          ...prev,
-          confidence: Math.min(
-            100,
-            Math.max(
-              70,
-              prev.confidence + Math.floor(Math.random() * 5 - 2)
-            )
-          ),
-          lastUpdate: new Date().toLocaleTimeString(),
-        };
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return { data, loading, error };
+  return {
+    data,
+    loading,
+    error,
+  };
 }

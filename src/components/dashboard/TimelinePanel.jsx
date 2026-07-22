@@ -21,7 +21,7 @@ export default function TimelinePanel() {
 
   return (
     <Card title="🕒 Movement Timeline">
-      <div className="max-h-64 overflow-y-auto pr-2">
+      <div className="max-h-[420px] overflow-y-auto pr-2 space-y-1">
 
         {timeline.map((item, index) => {
 
@@ -37,17 +37,17 @@ export default function TimelinePanel() {
           return (
             <div
               key={item.id}
-              className="relative pl-8 pb-6"
+              className="relative rounded-xl border border-slate-800 bg-slate-900/40 pl-10 pr-4 py-4"
             >
 
               {/* Vertical Line */}
               {index !== timeline.length - 1 && (
-                <div className="absolute left-3 top-6 h-full w-0.5 bg-slate-700" />
+                <div className="absolute left-3 top-7 h-full w-0.5 bg-gradient-to-b from-slate-600 to-slate-800" />
               )}
 
               {/* Timeline Dot */}
               <div
-                className={`absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full ${dotColor} ring-4 ring-slate-900`}
+                className={`absolute left-0 top-4 flex h-7 w-7 items-center justify-center rounded-full ${dotColor} ring-4 ring-slate-950 shadow-lg`}
               >
                 <div className="h-2 w-2 rounded-full bg-white" />
               </div>
@@ -58,9 +58,30 @@ export default function TimelinePanel() {
               </p>
 
               {/* Event */}
-              <h4 className="mt-1 text-sm font-semibold text-white">
+              <h4 className="mt-1 font-semibold text-white">
                 {item.event}
               </h4>
+
+              {/* Details */}
+              <p className="mt-1 text-sm text-slate-400">
+                {item.details}
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="rounded-full bg-blue-500/20 px-2 py-1 text-xs text-blue-400">
+                  {item.method}
+                </span>
+
+                <span className={`rounded-full px-2 py-1 text-xs ${
+                  item.type === "success"
+                    ? "bg-green-500/20 text-green-400"
+                    : item.type === "warning"
+                    ? "bg-yellow-500/20 text-yellow-400"
+                    : "bg-red-500/20 text-red-400"
+                  }`}>
+                    {item.type.toUpperCase()}
+                </span>
+              </div>
 
               {/* Optional description */}
               {item.description && (

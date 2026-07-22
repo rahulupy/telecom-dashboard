@@ -6,10 +6,10 @@ import {
 
 export default function MapLegend() {
   return (
-    <div className="absolute bottom-4 left-4 z-[1000] w-64 rounded-2xl border border-slate-700/50 bg-slate-900/90 backdrop-blur-md border border-slate-700 shadow-xl p-4">
+    <div className="absolute bottom-4 left-4 z-[1000] rounded-xl border border-slate-700 bg-slate-900/85 p-4 shadow-xl">
 
-      <h3 className="text-white font-semibold mb-4">
-        🗺 Map Legend
+      <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-slate-400">
+        Legend
       </h3>
 
       <div className="space-y-3 text-sm">
