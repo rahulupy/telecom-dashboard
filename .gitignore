@@ -23,3 +23,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# --- Localization module: keep real subscriber data OUT of git ---
+localization/data/real/
+all_cdr.csv
+all_lbs.csv
+engineering_tower_master.csv
+engineering_cell_master.csv
+*real_cdr_baseline_track.csv
+*combined_real_track_*.csv
+cctv_sighting_checkpoints.csv
+camera_locations*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
