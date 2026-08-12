@@ -19,19 +19,19 @@ probability heatmap with movement trace.
 | Member | Role | Contribution |
 |---|---|---|
 | Harsh Singh | Data Engineering & Integration | Dataset cleaning, schema standardization, validation (`FINAL_VALIDATION_REPORT.md`) |
-| Member 2 | Tower Database | `tower_lookup.py` — Cell ID → tower metadata lookup engine |
-| Member 3 | Localization & Tracking | `localization/` — WLS multilateration + Kalman filtering engine |
-| Member 4 | Visualization & Reporting | `src/` — React/Leaflet dashboard, heatmap, movement trace |
+| Aryan Verma | Tower Database | `tower_lookup.py` — Cell ID → tower metadata lookup engine |
+| Bulbul Deora | Localization & Tracking | `localization/` — WLS multilateration + Kalman filtering engine |
+| Rahul | Visualization & Reporting | `src/` — React/Leaflet dashboard, heatmap, movement trace |
 
 ## Project Structure
 
 ```
 telecom-dashboard/
-├── src/                     # React dashboard (Member 4)
+├── src/                     # React dashboard (Rahul)
 ├── public/data/             # Sample data consumed by the dashboard
 │   ├── movement_track.csv
 │   └── towers.csv
-├── localization/            # Localization engine (Member 3)
+├── localization/            # Localization engine (Bulbul Deora)
 │   ├── wls_multilateration.py
 │   ├── kalman_tracker.py
 │   ├── real_data_pipeline.py
@@ -44,7 +44,7 @@ telecom-dashboard/
 │   └── README.md
 ├── docs/                    # Shared documentation
 │   └── PS09_dataset_requirements.md
-├── tower_lookup.py          # Tower DB module (Member 2)
+├── tower_lookup.py          # Tower DB module (Aryan Verma)
 ├── package.json
 └── README.md                # (this file)
 ```
@@ -58,13 +58,13 @@ telecom-dashboard/
 [Data Engineering Layer] ── schema standardization, cleaning (Harsh)
         │
         ▼
-[Tower Lookup Module] ── Cell ID → tower coordinates/azimuth (Member 2)
+[Tower Lookup Module] ── Cell ID → tower coordinates/azimuth (Aryan Verma)
         │
         ▼
-[Localization Engine] ── WLS multilateration + Kalman filter (Member 3)
+[Localization Engine] ── WLS multilateration + Kalman filter (Bulbul Deora)
         │  outputs: lat/lon, confidence radius, method
         ▼
-[Visualization Dashboard] ── heatmap, movement trace, tower overlay (Member 4)
+[Visualization Dashboard] ── heatmap, movement trace, tower overlay (Rahul)
 ```
 
 ## Setup & Installation
