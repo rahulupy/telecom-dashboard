@@ -5,6 +5,12 @@ location from a coarse single-tower estimate (~1km radius) down to a
 street/block level, using Weighted Least Squares (WLS) multilateration
 and Kalman filtering, visualized on an interactive dashboard.
 
+## Demo
+
+- **Live Application:** https://telecom-dashboard-sigma.vercel.app
+- **Quick Demo Video (working prototype):** https://youtu.be/vebL7d3UDuc
+
+
 ## Problem Statement
 
 Single-tower location data is too coarse for actionable field operations.
